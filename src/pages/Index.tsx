@@ -9,9 +9,21 @@ interface FAQ {
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [selectedTour, setSelectedTour] = useState<string | null>(null)
+  const [modalOpen, setModalOpen] = useState(false)
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index)
+  }
+
+  const openBooking = (tourName: string) => {
+    setSelectedTour(tourName)
+    setModalOpen(true)
+  }
+
+  const closeBooking = () => {
+    setModalOpen(false)
+    setSelectedTour(null)
   }
 
   const faqs: FAQ[] = [
@@ -198,7 +210,7 @@ const Index = () => {
                     <span className="text-3xl font-bold">2 500 ₽</span>
                     <span className="text-white/50 text-sm"> / чел.</span>
                   </div>
-                  <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
+                  <Button onClick={() => openBooking("Пещеры Чатыр-Дага")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                 </div>
               </div>
             </div>
@@ -226,7 +238,7 @@ const Index = () => {
                     <span className="text-3xl font-bold">3 000 ₽</span>
                     <span className="text-white/50 text-sm"> / чел.</span>
                   </div>
-                  <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
+                  <Button onClick={() => openBooking("Восхождение на Ай-Петри")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                 </div>
               </div>
             </div>
@@ -254,7 +266,7 @@ const Index = () => {
                     <span className="text-3xl font-bold">7 900 ₽</span>
                     <span className="text-white/50 text-sm"> / чел.</span>
                   </div>
-                  <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
+                  <Button onClick={() => openBooking("Дикие бухты Карадага")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                 </div>
               </div>
             </div>
@@ -531,6 +543,52 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Booking Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeBooking} />
+          <div className="relative bg-[#13181d] ring-1 ring-white/15 rounded-3xl p-8 w-full max-w-md shadow-2xl">
+            <button
+              onClick={closeBooking}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white/70"
+            >
+              ✕
+            </button>
+            <h3 className="text-2xl font-bold mb-1 text-white">Запись на тур</h3>
+            <p className="text-white/50 text-sm mb-6">{selectedTour}</p>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-1">Ваше имя</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 ring-1 ring-white/15 text-white placeholder:text-white/30 focus:ring-2 focus:ring-white/30 focus:outline-none"
+                  placeholder="Как вас зовут?"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-1">Телефон</label>
+                <input
+                  type="tel"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 ring-1 ring-white/15 text-white placeholder:text-white/30 focus:ring-2 focus:ring-white/30 focus:outline-none"
+                  placeholder="+7 (999) 000-00-00"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-1">Желаемая дата</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 ring-1 ring-white/15 text-white placeholder:text-white/30 focus:ring-2 focus:ring-white/30 focus:outline-none"
+                  placeholder="Например: июль, любые выходные"
+                />
+              </div>
+              <Button className="w-full bg-white text-black hover:bg-white/90 rounded-xl py-3 text-base font-semibold mt-2">
+                Отправить заявку
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

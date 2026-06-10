@@ -16,24 +16,24 @@ const Index = () => {
 
   const faqs: FAQ[] = [
     {
-      question: "Насколько физически сложен этот тур?",
+      question: "Какая физическая подготовка нужна для туров?",
       answer:
-        "Экспедиция в Скрытую Долину требует отличной физической подготовки. Вам предстоит пройти более 15 км по джунглям, спуститься по веревке с 80-метровой высоты и преодолеть подземные реки. Участники должны быть готовы нести рюкзак весом 15 кг и иметь опыт спелеологии или треккинга.",
+        "Большинство наших туров рассчитаны на людей с базовой физической подготовкой. Горные маршруты требуют умения ходить по пересечённой местности 5–10 км в день. Для пещерных и скальных туров проводится краткий инструктаж — специальный опыт не нужен. Уровень сложности указан в описании каждого тура.",
     },
     {
       question: "Что входит в стоимость тура?",
       answer:
-        "В стоимость экспедиции включены все разрешения, профессиональные гиды, снаряжение для безопасности, палаточное оборудование, питание на маршруте, трансфер от базового лагеря и страховка экстренной эвакуации. Личные вещи, такие как одежда и средства гигиены, не включены.",
+        "В стоимость включены: трансфер от точки сбора, профессиональный гид, всё необходимое снаряжение, питание на маршруте и страховка. Проживание в отеле или глэмпинге включено в многодневные туры. Личные вещи и дорога до точки сбора — за свой счёт.",
     },
     {
-      question: "Безопасно ли исследовать пещеру Скрытой Долины?",
+      question: "Безопасно ли путешествовать по горному Крыму?",
       answer:
-        "Безопасность — наш абсолютный приоритет. Все гиды — сертифицированные спасатели-спелеологи, мы используем профессиональное снаряжение, поддерживаем постоянную связь с базовым лагерем и имеем комплексные протоколы на случай ЧП. Погодные условия отслеживаются непрерывно.",
+        "Безопасность — наш главный приоритет. Все гиды имеют сертификаты МЧС и опыт работы в горах от 5 лет. Мы отслеживаем погоду, используем профессиональное страховочное снаряжение и всегда имеем план эвакуации. За 7 лет работы — ни одного серьёзного инцидента.",
     },
     {
-      question: "Как забронировать место?",
+      question: "Как забронировать тур и внести оплату?",
       answer:
-        "Группы ограничены 10 участниками, экспедиции проводятся только в сухой сезон (февраль-август). Бронируйте за 6-12 месяцев через наш сайт. Предоплата 50% закрепляет ваше место, полная оплата — за 30 дней до выезда.",
+        "Оставьте заявку через форму на сайте или напишите нам напрямую. Мы свяжемся в течение нескольких часов, уточним детали и согласуем дату. Предоплата 30% бронирует ваше место, остаток — за 3 дня до тура. Принимаем переводы на карту.",
     },
   ]
 
@@ -45,7 +45,7 @@ const Index = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url(https://www.elledecoration.vn/wp-content/uploads/2025/03/1-son-doong.jpg)",
+            backgroundImage: "url(https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/5e6dc403-3c28-442f-8484-f5e33796300c.jpg)",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80" />
@@ -56,12 +56,12 @@ const Index = () => {
           {/* Logo */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
             <Compass className="w-5 h-5" />
-            <span className="font-medium text-balance">Horizon Adventures</span>
+            <span className="font-medium text-balance">Неизведанный край Крыма</span>
           </div>
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-1">
-            {["Экспедиция", "Безопасность", "Галерея", "Вопросы", "Контакты"].map((item) => (
+            {["Туры", "Безопасность", "Маршруты", "Вопросы", "Контакты"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -88,35 +88,35 @@ const Index = () => {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-6 text-center">
           {/* Badge */}
           <div className="mb-6 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <span className="text-sm font-medium">Эксклюзивные групповые экспедиции</span>
+            <span className="text-sm font-medium">Авторские туры по Крыму с опытными гидами</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-6 text-balance">Войдите в затерянный мир.</h1>
+          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-6 text-balance">Открой настоящий Крым.</h1>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-white/90 max-w-4xl mb-12 leading-relaxed text-pretty">
-            Исследуйте грандиозные залы пещеры Скрытой Долины в Южной Америке — уникальную экосистему с собственными джунглями и погодой — в рамках 4-дневной экспедиции с гидом.
+            Пещеры Чатыр-Дага, скалы Карадага, плато Ай-Петри — исследуйте дикую природу полуострова в авторских экспедициях с профессиональными гидами.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-4 text-lg">
-              Забронировать экспедицию
+              Выбрать тур
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="bg-black/40 ring-1 ring-white/20 backdrop-blur border-0 text-white hover:bg-black/50 rounded-full px-8 py-4 text-lg"
             >
-              Смотреть маршрут
+              Смотреть маршруты
             </Button>
           </div>
 
           {/* Footer Note */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
             <Lock className="w-4 h-4" />
-            <span className="text-sm font-medium">Безопасность — наш приоритет</span>
+            <span className="text-sm font-medium">Гиды с сертификатами МЧС — ваша безопасность гарантирована</span>
           </div>
         </div>
       </div>
@@ -130,8 +130,8 @@ const Index = () => {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
                 <Sparkles className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Туры с экспертами</h3>
-              <p className="text-white/80 leading-relaxed">Ведут геологи, спелеологи и местные специалисты.</p>
+              <h3 className="text-xl font-semibold mb-4">Авторские маршруты</h3>
+              <p className="text-white/80 leading-relaxed">Места, куда не возят туристические автобусы — только с нами.</p>
             </div>
 
             {/* World-Class Safety */}
@@ -139,8 +139,8 @@ const Index = () => {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Мировой уровень безопасности</h3>
-              <p className="text-white/80 leading-relaxed">Строгие протоколы и современное снаряжение.</p>
+              <h3 className="text-xl font-semibold mb-4">Гиды МЧС</h3>
+              <p className="text-white/80 leading-relaxed">Сертифицированные спасатели с опытом от 5 лет в крымских горах.</p>
             </div>
 
             {/* All-Inclusive Package */}
@@ -148,17 +148,17 @@ const Index = () => {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
                 <Wallet className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Все включено</h3>
-              <p className="text-white/80 leading-relaxed">Разрешения, снаряжение, питание и трансфер.</p>
+              <h3 className="text-xl font-semibold mb-4">Всё включено</h3>
+              <p className="text-white/80 leading-relaxed">Снаряжение, питание на маршруте, трансфер и страховка.</p>
             </div>
 
-            {/* Eco-Friendly Caving */}
+            {/* Eco */}
             <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
                 <Leaf className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Эко-спелеология</h3>
-              <p className="text-white/80 leading-relaxed">Мы бережно сохраняем экосистему пещеры.</p>
+              <h3 className="text-xl font-semibold mb-4">Бережный туризм</h3>
+              <p className="text-white/80 leading-relaxed">Мы сохраняем природу Крыма — маршруты без вреда экосистеме.</p>
             </div>
           </div>
         </div>
@@ -170,54 +170,54 @@ const Index = () => {
           <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12">
             {/* Section Header */}
             <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Ваше эпическое путешествие</h2>
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Как проходит тур</h2>
               <p className="text-xl text-white/80 max-w-3xl mx-auto text-pretty">
-                От джунглей до подземных лагерей — вот что вас ждет.
+                От сбора группы до финальной точки маршрута — каждый шаг продуман для вашего комфорта и впечатлений.
               </p>
             </div>
 
             {/* Journey Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-              {/* Phase 1: Briefing & Prep */}
+              {/* Phase 1 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">01.</div>
-                  <h3 className="text-xl font-semibold mb-4">Инструктаж</h3>
+                  <h3 className="text-xl font-semibold mb-4">Сбор и инструктаж</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Ваше приключение начинается в базовом лагере с полного инструктажа по безопасности и проверки снаряжения.
+                    Встречаемся в условленном месте, проверяем снаряжение и проводим краткий инструктаж по безопасности. Знакомимся с группой.
                   </p>
                 </div>
               </div>
 
-              {/* Phase 2: The Trek */}
+              {/* Phase 2 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">02.</div>
-                  <h3 className="text-xl font-semibold mb-4">Треккинг</h3>
+                  <h3 className="text-xl font-semibold mb-4">Выход на маршрут</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Идите через нетронутые джунгли, пересекайте реки и ночуйте в удаленных точках по пути ко входу в Скрытую Долину.
+                    Гид ведёт группу по авторскому маршруту — через горные тропы, каньоны, можжевеловые леса и смотровые площадки.
                   </p>
                 </div>
               </div>
 
-              {/* Phase 3: Caving */}
+              {/* Phase 3 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">03.</div>
-                  <h3 className="text-xl font-semibold mb-4">Спелеология</h3>
+                  <h3 className="text-xl font-semibold mb-4">Изюминка маршрута</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Спуститесь в пещеру, чтобы увидеть гигантские сталагмиты, исследовать огромные залы и уникальные подземные джунгли.
+                    Главная точка тура — пещера, вершина, бухта или каньон. Время для фото, рассказов гида об истории и геологии.
                   </p>
                 </div>
               </div>
 
-              {/* Phase 4: Base Camp */}
+              {/* Phase 4 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">04.</div>
-                  <h3 className="text-xl font-semibold mb-4">Базовый лагерь</h3>
+                  <h3 className="text-xl font-semibold mb-4">Финал и возвращение</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Проведите ночи на потрясающих стоянках внутри пещеры, делясь историями с группой перед обратным путем.
+                    Завершаем маршрут у костра или в уютном месте, делимся впечатлениями. Трансфер обратно в точку сбора.
                   </p>
                 </div>
               </div>
@@ -229,7 +229,7 @@ const Index = () => {
                 size="lg"
                 className="bg-white text-black hover:bg-white/90 rounded-full px-12 py-4 text-lg font-semibold"
               >
-                Проверить наличие мест
+                Посмотреть расписание туров
               </Button>
             </div>
           </div>
@@ -247,7 +247,7 @@ const Index = () => {
                   Частые вопросы
                 </h2>
                 <p className="text-xl text-white/80 leading-relaxed text-pretty">
-                  Все, что нужно знать об экспедиции: от физических требований до бронирования места в этом эксклюзивном приключении.
+                  Всё, что нужно знать о турах по Крыму: от уровня сложности до бронирования места в группе.
                 </p>
               </div>
 
@@ -288,49 +288,49 @@ const Index = () => {
           <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-12">
             {/* Section Header */}
             <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Свяжитесь с нами</h2>
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Записаться в тур</h2>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               {/* Left Column - Contact Form */}
               <div className="rounded-2xl bg-white/95 text-black p-8 shadow-2xl">
-                <h3 className="text-2xl font-bold mb-6">Отправить запрос</h3>
+                <h3 className="text-2xl font-bold mb-6">Оставить заявку</h3>
                 <form className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Имя
+                      Ваше имя
                     </label>
                     <input
                       type="text"
                       id="name"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Ваше полное имя"
+                      placeholder="Как вас зовут?"
                     />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email
+                      Телефон или Email
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       id="email"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="your.email@example.com"
+                      placeholder="+7 (999) 000-00-00"
                     />
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Сообщение
+                      Какой тур вас интересует?
                     </label>
                     <textarea
                       id="message"
                       rows={5}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      placeholder="Расскажите о ваших интересах в экспедиции..."
+                      placeholder="Расскажите, что хотите увидеть в Крыму — горы, пещеры, море, или всё вместе..."
                     />
                   </div>
                   <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 font-normal text-base">
-                    Отправить сообщение
+                    Отправить заявку
                   </Button>
                 </form>
               </div>
@@ -339,7 +339,7 @@ const Index = () => {
               <div className="space-y-8">
                 <div>
                   <p className="text-xl text-white/90 leading-relaxed text-pretty">
-                    По вопросам индивидуальных туров, партнерства или для СМИ — свяжитесь с нами. Мы отвечаем в течение одного рабочего дня.
+                    Напишите нам — расскажем о доступных датах, подберём тур под ваш уровень подготовки и ответим на любые вопросы. Отвечаем в течение нескольких часов.
                   </p>
                 </div>
 
@@ -348,12 +348,12 @@ const Index = () => {
                   <div className="flex items-center gap-4 mb-4">
                     <img
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-                      alt="Маркус Уильямс"
+                      alt="Руководитель туров"
                       className="w-16 h-16 rounded-full object-cover"
                     />
                     <div>
-                      <h4 className="text-lg font-semibold">Маркус Уильямс</h4>
-                      <p className="text-gray-600">Руководитель экспедиций</p>
+                      <h4 className="text-lg font-semibold">Алексей Горный</h4>
+                      <p className="text-gray-600">Главный гид и основатель</p>
                     </div>
                   </div>
                   <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg flex items-center justify-center gap-2">
@@ -377,18 +377,18 @@ const Index = () => {
               <div className="lg:col-span-2">
                 <div className="flex items-center gap-2 mb-6">
                   <Compass className="w-6 h-6" />
-                  <span className="text-xl font-semibold">Horizon Adventures</span>
+                  <span className="text-xl font-semibold">Неизведанный край Крыма</span>
                 </div>
                 <p className="text-white/80 leading-relaxed text-pretty">
-                  Официальный туроператор экспедиций в Скрытую Долину — крупнейшую пещеру мира. Мы преданы безопасности, охране природы и незабываемым приключениям.
+                  Авторские туры и экспедиции по Крыму. Пещеры, горы, каньоны и дикие бухты — показываем полуостров с той стороны, которую не видят обычные туристы.
                 </p>
               </div>
 
-              {/* Expedition Links */}
+              {/* Tours Links */}
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">ЭКСПЕДИЦИЯ</h3>
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">ТУРЫ</h3>
                 <ul className="space-y-3">
-                  {["Маршрут", "Цены", "Список снаряжения", "Фотогалерея"].map((item) => (
+                  {["Горные маршруты", "Пещерные туры", "Морские прогулки", "Многодневные экспедиции"].map((item) => (
                     <li key={item}>
                       <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">
                         {item}
@@ -402,7 +402,7 @@ const Index = () => {
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider mb-6">О НАС</h3>
                 <ul className="space-y-3">
-                  {["Наша миссия", "Стандарты безопасности", "Команда", "Охрана природы"].map((item) => (
+                  {["Наша команда", "Безопасность", "Отзывы", "Блог о Крыме"].map((item) => (
                     <li key={item}>
                       <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">
                         {item}
@@ -412,11 +412,11 @@ const Index = () => {
                 </ul>
               </div>
 
-              {/* Resources Links */}
+              {/* Support Links */}
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider mb-6">ПОДДЕРЖКА</h3>
                 <ul className="space-y-3">
-                  {["Справочный центр", "Контакты", "Вопросы и ответы", "Условия"].map((item) => (
+                  {["Как забронировать", "Контакты", "Вопросы и ответы", "Условия участия"].map((item) => (
                     <li key={item}>
                       <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">
                         {item}
@@ -430,7 +430,7 @@ const Index = () => {
             {/* Newsletter Section */}
             <div className="border-t border-white/10 pt-12 mb-12">
               <div className="max-w-md">
-                <h3 className="text-lg font-semibold mb-4">Новости экспедиций</h3>
+                <h3 className="text-lg font-semibold mb-4">Новости и свежие маршруты</h3>
                 <div className="flex gap-3">
                   <input
                     type="email"
@@ -444,7 +444,7 @@ const Index = () => {
 
             {/* Sub-footer */}
             <div className="border-t border-white/10 pt-8">
-              <p className="text-white/60 text-sm text-center">© 2025 Horizon Adventures</p>
+              <p className="text-white/60 text-sm text-center">© 2025 Неизведанный край Крыма</p>
             </div>
           </div>
         </div>

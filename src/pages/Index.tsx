@@ -179,47 +179,31 @@ const Index = () => {
             {/* Journey Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
               {/* Phase 1 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">01.</div>
-                  <h3 className="text-xl font-semibold mb-4">Сбор и инструктаж</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Встречаемся в условленном месте, проверяем снаряжение и проводим краткий инструктаж по безопасности. Знакомимся с группой.
-                  </p>
-                </div>
+              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 flex flex-col gap-3">
+                <div className="text-3xl font-bold text-white/60">01.</div>
+                <h3 className="text-xl font-semibold">Сбор и инструктаж</h3>
+                <p className="text-white/70 text-sm">Встречаемся, проверяем снаряжение, знакомимся с группой.</p>
               </div>
 
               {/* Phase 2 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">02.</div>
-                  <h3 className="text-xl font-semibold mb-4">Выход на маршрут</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Гид ведёт группу по авторскому маршруту — через горные тропы, каньоны, можжевеловые леса и смотровые площадки.
-                  </p>
-                </div>
+              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 flex flex-col gap-3">
+                <div className="text-3xl font-bold text-white/60">02.</div>
+                <h3 className="text-xl font-semibold">Выход на маршрут</h3>
+                <p className="text-white/70 text-sm">Горные тропы, каньоны и смотровые площадки под руководством гида.</p>
               </div>
 
               {/* Phase 3 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">03.</div>
-                  <h3 className="text-xl font-semibold mb-4">Изюминка маршрута</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Главная точка тура — пещера, вершина, бухта или каньон. Время для фото, рассказов гида об истории и геологии.
-                  </p>
-                </div>
+              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 flex flex-col gap-3">
+                <div className="text-3xl font-bold text-white/60">03.</div>
+                <h3 className="text-xl font-semibold">Изюминка маршрута</h3>
+                <p className="text-white/70 text-sm">Пещера, вершина или бухта — главная точка тура с рассказом гида.</p>
               </div>
 
               {/* Phase 4 */}
-              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
-                <div className="flex-1">
-                  <div className="text-3xl font-bold text-white/60 mb-4">04.</div>
-                  <h3 className="text-xl font-semibold mb-4">Финал и возвращение</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Завершаем маршрут у костра или в уютном месте, делимся впечатлениями. Трансфер обратно в точку сбора.
-                  </p>
-                </div>
+              <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 flex flex-col gap-3">
+                <div className="text-3xl font-bold text-white/60">04.</div>
+                <h3 className="text-xl font-semibold">Финал</h3>
+                <p className="text-white/70 text-sm">Делимся впечатлениями и возвращаемся в точку сбора.</p>
               </div>
             </div>
 

@@ -403,91 +403,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="relative z-10 py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-12">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Записаться в тур</h2>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              {/* Left Column - Contact Form */}
-              <div className="rounded-2xl bg-white/95 text-black p-8 shadow-2xl">
-                <h3 className="text-2xl font-bold mb-6">Оставить заявку</h3>
-                <form className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Ваше имя
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Как вас зовут?"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Телефон или Email
-                    </label>
-                    <input
-                      type="text"
-                      id="email"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="+7 (999) 000-00-00"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Какой тур вас интересует?
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      placeholder="Расскажите, что хотите увидеть в Крыму — горы, пещеры, море, или всё вместе..."
-                    />
-                  </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 font-normal text-base">
-                    Отправить заявку
-                  </Button>
-                </form>
-              </div>
-
-              {/* Right Column - Contact Info */}
-              <div className="space-y-8">
-                <div>
-                  <p className="text-xl text-white/90 leading-relaxed text-pretty">
-                    Напишите нам — расскажем о доступных датах, подберём тур под ваш уровень подготовки и ответим на любые вопросы. Отвечаем в течение нескольких часов.
-                  </p>
-                </div>
-
-                {/* Profile Card */}
-                <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
-                  <div className="flex items-center gap-4 mb-4">
-                    <img
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-                      alt="Руководитель туров"
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div>
-                      <h4 className="text-lg font-semibold">Алексей Горный</h4>
-                      <p className="text-gray-600">Главный гид и основатель</p>
-                    </div>
-                  </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg flex items-center justify-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    Написать
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Gallery Section */}
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -534,6 +449,57 @@ const Index = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-12">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Записаться в тур</h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+              <div className="rounded-2xl bg-white/95 text-black p-8 shadow-2xl">
+                <h3 className="text-2xl font-bold mb-6">Оставить заявку</h3>
+                <form className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">Ваше имя</label>
+                    <input type="text" id="name" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Как вас зовут?" />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">Телефон или Email</label>
+                    <input type="text" id="email" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+7 (999) 000-00-00" />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">Какой тур вас интересует?</label>
+                    <textarea id="message" rows={5} className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder="Расскажите, что хотите увидеть в Крыму — горы, пещеры, море, или всё вместе..." />
+                  </div>
+                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 font-normal text-base">Отправить заявку</Button>
+                </form>
+              </div>
+
+              <div className="space-y-8">
+                <p className="text-xl text-white/90 leading-relaxed text-pretty">
+                  Напишите нам — расскажем о доступных датах, подберём тур под ваш уровень подготовки и ответим на любые вопросы. Отвечаем в течение нескольких часов.
+                </p>
+                <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
+                  <div className="flex items-center gap-4 mb-4">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Руководитель туров" className="w-16 h-16 rounded-full object-cover" />
+                    <div>
+                      <h4 className="text-lg font-semibold">Алексей Горный</h4>
+                      <p className="text-gray-600">Главный гид и основатель</p>
+                    </div>
+                  </div>
+                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg flex items-center justify-center gap-2">
+                    <Mail className="w-4 h-4" />
+                    Написать
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

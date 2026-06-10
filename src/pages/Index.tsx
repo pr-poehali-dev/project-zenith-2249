@@ -1,4 +1,4 @@
-import { Compass, Lock, Sparkles, ShieldCheck, Wallet, Leaf, Plus, Minus, Mail } from "lucide-react"
+import { Compass, Lock, Sparkles, ShieldCheck, Wallet, Leaf, Plus, Minus, Mail, ChevronLeft, ChevronRight, X, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
@@ -16,8 +16,14 @@ const Index = () => {
     setOpenFaq(openFaq === index ? null : index)
   }
 
+  const [selectedDate, setSelectedDate] = useState<number | null>(null)
+  const [calendarMonth, setCalendarMonth] = useState(6)
+  const [galleryOpen, setGalleryOpen] = useState(false)
+  const [galleryIndex, setGalleryIndex] = useState(0)
+
   const openBooking = (tourName: string) => {
     setSelectedTour(tourName)
+    setSelectedDate(null)
     setModalOpen(true)
   }
 
@@ -25,6 +31,27 @@ const Index = () => {
     setModalOpen(false)
     setSelectedTour(null)
   }
+
+  const availableDates = [3, 7, 10, 14, 17, 21, 24, 28]
+  const monthNames = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
+  const daysInMonth = new Date(2026, calendarMonth, 0).getDate()
+  const firstDay = new Date(2026, calendarMonth - 1, 1).getDay()
+  const startOffset = firstDay === 0 ? 6 : firstDay - 1
+
+  const galleryImages = [
+    { src: "https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/715508c6-21a4-4daa-b70a-5ef82e459f53.jpg", caption: "Горная тропа" },
+    { src: "https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/e3d1714c-4038-4ad4-94e8-618034c1b35f.jpg", caption: "Скалы Карадага" },
+    { src: "https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/8b782a70-934f-4844-a320-a4441633ceea.jpg", caption: "Подземная река" },
+    { src: "https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/bbac54b5-291b-4767-9f0e-921a6db2ac61.jpg", caption: "Прибрежные скалы" },
+    { src: "https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/55cb93a3-3dba-4d19-bc6f-cca3e4b2e28a.jpg", caption: "Ночной лагерь" },
+    { src: "https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/f2089e41-2bd5-4e78-bb38-2f6c03f0a086.jpg", caption: "Крепость Мангуп" },
+  ]
+
+  const reviews = [
+    { name: "Анна К.", date: "Май 2026", tour: "Восхождение на Ай-Петри", text: "Невероятное путешествие! Гид знает каждую тропинку и рассказывает такие истории, что время летит незаметно. Вид с вершины — незабываемый.", rating: 5 },
+    { name: "Дмитрий М.", date: "Апрель 2026", tour: "Пещеры Чатыр-Дага", text: "Был скептически настроен, но это превзошло все ожидания. Мраморная пещера — это что-то из другого мира. Обязательно вернусь на Карадаг.", rating: 5 },
+    { name: "Светлана Р.", date: "Июнь 2026", tour: "Дикие бухты Карадага", text: "Два дня у моря без толпы туристов — это бесценно. Ночёвка в глэмпинге под звёздами и купание в бухтах, куда добраться можно только пешком.", rating: 5 },
+  ]
 
   const faqs: FAQ[] = [
     {
@@ -461,6 +488,56 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Gallery Section */}
+      <section className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Галерея</h2>
+            <p className="text-xl text-white/80 max-w-2xl mx-auto">Живые моменты из наших экспедиций.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryImages.map((img, i) => (
+              <div
+                key={i}
+                className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group"
+                onClick={() => { setGalleryIndex(i); setGalleryOpen(true) }}
+              >
+                <img src={img.src} alt={img.caption} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end p-4">
+                  <span className="text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">{img.caption}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Отзывы</h2>
+            <p className="text-xl text-white/80 max-w-2xl mx-auto">Что говорят те, кто уже побывал с нами.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {reviews.map((r, i) => (
+              <div key={i} className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 flex flex-col gap-4">
+                <div className="flex gap-1">
+                  {Array.from({ length: r.rating }).map((_, s) => (
+                    <Star key={s} className="w-4 h-4 fill-white text-white" />
+                  ))}
+                </div>
+                <p className="text-white/85 leading-relaxed flex-1">«{r.text}»</p>
+                <div className="border-t border-white/10 pt-4">
+                  <div className="font-semibold">{r.name}</div>
+                  <div className="text-white/50 text-sm">{r.tour} · {r.date}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -544,6 +621,31 @@ const Index = () => {
         </div>
       </footer>
 
+      {/* Gallery Lightbox */}
+      {galleryOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
+          <button onClick={() => setGalleryOpen(false)} className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => setGalleryIndex(i => (i - 1 + galleryImages.length) % galleryImages.length)}
+            className="absolute left-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <div className="max-w-3xl w-full">
+            <img src={galleryImages[galleryIndex].src} alt={galleryImages[galleryIndex].caption} className="w-full rounded-2xl object-cover max-h-[75vh]" />
+            <p className="text-center text-white/60 mt-4">{galleryImages[galleryIndex].caption} · {galleryIndex + 1} / {galleryImages.length}</p>
+          </div>
+          <button
+            onClick={() => setGalleryIndex(i => (i + 1) % galleryImages.length)}
+            className="absolute right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      )}
+
       {/* Booking Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -575,12 +677,51 @@ const Index = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-1">Желаемая дата</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 ring-1 ring-white/15 text-white placeholder:text-white/30 focus:ring-2 focus:ring-white/30 focus:outline-none"
-                  placeholder="Например: июль, любые выходные"
-                />
+                <label className="block text-sm font-medium text-white/80 mb-2">Желаемая дата</label>
+                <div className="rounded-xl bg-white/5 ring-1 ring-white/15 p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <button onClick={() => setCalendarMonth(m => Math.max(1, m - 1))} className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <span className="text-sm font-semibold">{monthNames[calendarMonth - 1]} 2026</span>
+                    <button onClick={() => setCalendarMonth(m => Math.min(12, m + 1))} className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-7 gap-1 mb-2">
+                    {["Пн","Вт","Ср","Чт","Пт","Сб","Вс"].map(d => (
+                      <div key={d} className="text-center text-white/30 text-xs py-1">{d}</div>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-7 gap-1">
+                    {Array.from({ length: startOffset }).map((_, i) => <div key={`e${i}`} />)}
+                    {Array.from({ length: daysInMonth }).map((_, i) => {
+                      const day = i + 1
+                      const isAvailable = availableDates.includes(day)
+                      const isSelected = selectedDate === day
+                      return (
+                        <button
+                          key={day}
+                          type="button"
+                          disabled={!isAvailable}
+                          onClick={() => isAvailable && setSelectedDate(day)}
+                          className={`aspect-square rounded-lg text-xs font-medium transition-colors ${
+                            isSelected ? "bg-white text-black" :
+                            isAvailable ? "bg-white/10 text-white hover:bg-white/20" :
+                            "text-white/20 cursor-default"
+                          }`}
+                        >
+                          {day}
+                        </button>
+                      )
+                    })}
+                  </div>
+                  {selectedDate && (
+                    <p className="text-center text-sm text-white/60 mt-3">
+                      Выбрано: {selectedDate} {monthNames[calendarMonth - 1]}
+                    </p>
+                  )}
+                </div>
               </div>
               <Button className="w-full bg-white text-black hover:bg-white/90 rounded-xl py-3 text-base font-semibold mt-2">
                 Отправить заявку

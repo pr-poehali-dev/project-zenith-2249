@@ -95,7 +95,7 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				shimmer: 'shimmer 10s linear infinite',
+				shimmer: 'shimmer 6s ease-in-out infinite alternate',
 			}
 		}
 	},

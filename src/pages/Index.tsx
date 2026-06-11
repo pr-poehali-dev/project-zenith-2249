@@ -131,7 +131,7 @@ const Index = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-6 text-balance bg-gradient-to-r from-white via-cyan-300 to-blue-400 bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">Открой настоящий Крым.</h1>
+          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-6 text-balance">Открой настоящий Крым.</h1>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-white/90 max-w-4xl mb-12 leading-relaxed text-pretty">

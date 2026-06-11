@@ -1,6 +1,39 @@
 import { Compass, Lock, Sparkles, ShieldCheck, Wallet, Leaf, Plus, Minus, Mail, ChevronLeft, ChevronRight, X, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
+
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
+      { threshold: 0.12 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+  return { ref, visible }
+}
+
+function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const { ref, visible } = useScrollReveal()
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(40px)",
+        transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  )
+}
 
 interface FAQ {
   question: string
@@ -11,6 +44,13 @@ const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [selectedTour, setSelectedTour] = useState<string | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -85,6 +125,8 @@ const Index = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: "url(https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/5e6dc403-3c28-442f-8484-f5e33796300c.jpg)",
+            transform: `translateY(${scrollY * 0.35}px)`,
+            willChange: "transform",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80" />
@@ -164,41 +206,42 @@ const Index = () => {
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {/* Expert-Led Tours */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Sparkles className="w-6 h-6" />
+            <Reveal delay={0}>
+              <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
+                  <Sparkles className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Авторские маршруты</h3>
+                <p className="text-white/80 leading-relaxed">Места, куда не возят туристические автобусы — только с нами.</p>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Авторские маршруты</h3>
-              <p className="text-white/80 leading-relaxed">Места, куда не возят туристические автобусы — только с нами.</p>
-            </div>
-
-            {/* World-Class Safety */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <ShieldCheck className="w-6 h-6" />
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Гиды МЧС</h3>
+                <p className="text-white/80 leading-relaxed">Сертифицированные спасатели с опытом от 5 лет в крымских горах.</p>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Гиды МЧС</h3>
-              <p className="text-white/80 leading-relaxed">Сертифицированные спасатели с опытом от 5 лет в крымских горах.</p>
-            </div>
-
-            {/* All-Inclusive Package */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Wallet className="w-6 h-6" />
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
+                  <Wallet className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Всё включено</h3>
+                <p className="text-white/80 leading-relaxed">Снаряжение, питание на маршруте, трансфер и страховка.</p>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Всё включено</h3>
-              <p className="text-white/80 leading-relaxed">Снаряжение, питание на маршруте, трансфер и страховка.</p>
-            </div>
-
-            {/* Eco */}
-            <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Leaf className="w-6 h-6" />
+            </Reveal>
+            <Reveal delay={300}>
+              <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
+                  <Leaf className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Бережный туризм</h3>
+                <p className="text-white/80 leading-relaxed">Мы сохраняем природу Крыма — маршруты без вреда экосистеме.</p>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Бережный туризм</h3>
-              <p className="text-white/80 leading-relaxed">Мы сохраняем природу Крыма — маршруты без вреда экосистеме.</p>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -215,88 +258,61 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Tour 1 */}
-            <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur overflow-hidden flex flex-col">
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src="https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/e4d2dbf2-d1fe-45a7-9af9-bb2ea7005977.jpg"
-                  alt="Пещеры Чатыр-Дага"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur rounded-full text-sm font-medium">
-                  1 день
+            <Reveal delay={0}>
+              <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur overflow-hidden flex flex-col">
+                <div className="relative h-56 overflow-hidden">
+                  <img src="https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/e4d2dbf2-d1fe-45a7-9af9-bb2ea7005977.jpg" alt="Пещеры Чатыр-Дага" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur rounded-full text-sm font-medium">1 день</div>
                 </div>
-              </div>
-              <div className="p-8 flex flex-col flex-1">
-                <h3 className="text-2xl font-bold mb-2">Пещеры Чатыр-Дага</h3>
-                <p className="text-white/70 text-sm mb-6 flex-1">
-                  Мраморная и Эмине-Баир-Хосар — две самые красивые пещеры Крыма. Сталактиты, подземные озёра и тысячелетняя история.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-3xl font-bold">2 500 ₽</span>
-                    <span className="text-white/50 text-sm"> / чел.</span>
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="text-2xl font-bold mb-2">Пещеры Чатыр-Дага</h3>
+                  <p className="text-white/70 text-sm mb-6 flex-1">Мраморная и Эмине-Баир-Хосар — две самые красивые пещеры Крыма. Сталактиты, подземные озёра и тысячелетняя история.</p>
+                  <div className="flex items-center justify-between">
+                    <div><span className="text-3xl font-bold">2 500 ₽</span><span className="text-white/50 text-sm"> / чел.</span></div>
+                    <Button onClick={() => openBooking("Пещеры Чатыр-Дага")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                   </div>
-                  <Button onClick={() => openBooking("Пещеры Чатыр-Дага")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Tour 2 */}
-            <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur overflow-hidden flex flex-col">
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src="https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/db46692b-613c-4a11-8f29-1f56436e6b0e.jpg"
-                  alt="Восхождение на Ай-Петри"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur rounded-full text-sm font-medium">
-                  1 день
+            <Reveal delay={150}>
+              <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur overflow-hidden flex flex-col">
+                <div className="relative h-56 overflow-hidden">
+                  <img src="https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/db46692b-613c-4a11-8f29-1f56436e6b0e.jpg" alt="Восхождение на Ай-Петри" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur rounded-full text-sm font-medium">1 день</div>
                 </div>
-              </div>
-              <div className="p-8 flex flex-col flex-1">
-                <h3 className="text-2xl font-bold mb-2">Восхождение на Ай-Петри</h3>
-                <p className="text-white/70 text-sm mb-6 flex-1">
-                  Подъём по горной тропе, панорама на всё побережье, рассвет над облаками. Один из самых эффектных маршрутов Крыма.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-3xl font-bold">3 000 ₽</span>
-                    <span className="text-white/50 text-sm"> / чел.</span>
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="text-2xl font-bold mb-2">Восхождение на Ай-Петри</h3>
+                  <p className="text-white/70 text-sm mb-6 flex-1">Подъём по горной тропе, панорама на всё побережье, рассвет над облаками. Один из самых эффектных маршрутов Крыма.</p>
+                  <div className="flex items-center justify-between">
+                    <div><span className="text-3xl font-bold">3 000 ₽</span><span className="text-white/50 text-sm"> / чел.</span></div>
+                    <Button onClick={() => openBooking("Восхождение на Ай-Петри")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                   </div>
-                  <Button onClick={() => openBooking("Восхождение на Ай-Петри")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Tour 3 */}
-            <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur overflow-hidden flex flex-col">
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src="https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/0b07cf16-8c45-4ec5-b3bb-c07e01385e6f.jpg"
-                  alt="Дикие бухты Карадага"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur rounded-full text-sm font-medium">
-                  2 дня
+            <Reveal delay={300}>
+              <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur overflow-hidden flex flex-col">
+                <div className="relative h-56 overflow-hidden">
+                  <img src="https://cdn.poehali.dev/projects/83c4ee5a-bf13-487c-9f3a-f2110e5e4555/files/0b07cf16-8c45-4ec5-b3bb-c07e01385e6f.jpg" alt="Дикие бухты Карадага" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur rounded-full text-sm font-medium">2 дня</div>
                 </div>
-              </div>
-              <div className="p-8 flex flex-col flex-1">
-                <h3 className="text-2xl font-bold mb-2">Дикие бухты Карадага</h3>
-                <p className="text-white/70 text-sm mb-6 flex-1">
-                  Вулканический заповедник, скала Золотые Ворота и бухты без единого туриста. Ночёвка в глэмпинге у моря.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-3xl font-bold">7 900 ₽</span>
-                    <span className="text-white/50 text-sm"> / чел.</span>
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="text-2xl font-bold mb-2">Дикие бухты Карадага</h3>
+                  <p className="text-white/70 text-sm mb-6 flex-1">Вулканический заповедник, скала Золотые Ворота и бухты без единого туриста. Ночёвка в глэмпинге у моря.</p>
+                  <div className="flex items-center justify-between">
+                    <div><span className="text-3xl font-bold">7 900 ₽</span><span className="text-white/50 text-sm"> / чел.</span></div>
+                    <Button onClick={() => openBooking("Дикие бухты Карадага")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                   </div>
-                  <Button onClick={() => openBooking("Дикие бухты Карадага")} className="bg-white text-black hover:bg-white/90 rounded-full px-6">Записаться</Button>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -406,22 +422,25 @@ const Index = () => {
       {/* Gallery Section */}
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Галерея</h2>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">Живые моменты из наших экспедиций.</p>
-          </div>
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Галерея</h2>
+              <p className="text-xl text-white/80 max-w-2xl mx-auto">Живые моменты из наших экспедиций.</p>
+            </div>
+          </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((img, i) => (
-              <div
-                key={i}
-                className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group"
-                onClick={() => { setGalleryIndex(i); setGalleryOpen(true) }}
-              >
-                <img src={img.src} alt={img.caption} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end p-4">
-                  <span className="text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">{img.caption}</span>
+              <Reveal key={i} delay={i * 80}>
+                <div
+                  className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group"
+                  onClick={() => { setGalleryIndex(i); setGalleryOpen(true) }}
+                >
+                  <img src={img.src} alt={img.caption} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end p-4">
+                    <span className="text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">{img.caption}</span>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -430,24 +449,28 @@ const Index = () => {
       {/* Reviews Section */}
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Отзывы</h2>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">Что говорят те, кто уже побывал с нами.</p>
-          </div>
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Отзывы</h2>
+              <p className="text-xl text-white/80 max-w-2xl mx-auto">Что говорят те, кто уже побывал с нами.</p>
+            </div>
+          </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {reviews.map((r, i) => (
-              <div key={i} className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 flex flex-col gap-4">
-                <div className="flex gap-1">
-                  {Array.from({ length: r.rating }).map((_, s) => (
-                    <Star key={s} className="w-4 h-4 fill-white text-white" />
-                  ))}
+              <Reveal key={i} delay={i * 120}>
+                <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 flex flex-col gap-4">
+                  <div className="flex gap-1">
+                    {Array.from({ length: r.rating }).map((_, s) => (
+                      <Star key={s} className="w-4 h-4 fill-white text-white" />
+                    ))}
+                  </div>
+                  <p className="text-white/85 leading-relaxed flex-1">«{r.text}»</p>
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="font-semibold">{r.name}</div>
+                    <div className="text-white/50 text-sm">{r.tour} · {r.date}</div>
+                  </div>
                 </div>
-                <p className="text-white/85 leading-relaxed flex-1">«{r.text}»</p>
-                <div className="border-t border-white/10 pt-4">
-                  <div className="font-semibold">{r.name}</div>
-                  <div className="text-white/50 text-sm">{r.tour} · {r.date}</div>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
